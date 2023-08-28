@@ -4,24 +4,39 @@ import java.util.HashMap;
 import java.util.Map;
 
 // BEGIN
-public class App {
-    public static Map < String, Integer > getWordCount(String sentence) {
-        Map < String, Integer > wordCount = new HashMap < > ();
-        String[] words = sentence.split(" ");
+class App {
+    public static Map getWordCount(String sentence) {
 
-        for (String word: words) {
-            wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
+        String[] words = sentence.split(" ");
+        Map map = new HashMap();
+
+        if (sentence.length() == 0) {
+            return map;
         }
-        return wordCount;
+
+        for (String word : words) {
+            int wordCount = (int) map.getOrDefault(word, 0);
+            wordCount += 1;
+            map.put(word, wordCount);
+        }
+
+        return map;
     }
-    public static String toString(Map < String, Integer > wordCounts) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("{\n");
-        for (Map.Entry < String, Integer > entry: wordCounts.entrySet()) {
-            sb.append("  ").append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+
+    public static String toString(Map wordsCount) {
+
+        if (wordsCount.isEmpty()) {
+            return "{}";
         }
-        sb.append("}");
-        return sb.toString();
+
+        StringBuilder result = new StringBuilder("{\n");
+
+        for (Object key : wordsCount.keySet()) {
+            result.append("  " + key + ": " + wordsCount.get(key) + "\n");
+        }
+
+        result.append("}");
+        return result.toString();
     }
 }
 //END
