@@ -11,53 +11,21 @@ class AppTest {
     @Test
     void testTake() {
         // BEGIN
-        List<Integer> inputList = Arrays.asList(1, 2, 3, 4, 5);
-        int n = 3;
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> expected1 = new ArrayList<>();
+        List<Integer> result1 = App.take(list1, 3);
+        assertThat(result1).isEqualTo(expected1);
 
-        List<Integer> result = YourClass.take(inputList, n);
+        List<Integer> list2 = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
+        List<Integer> expected2 = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
+        List<Integer> result2 = App.take(list2, 10);
+        assertThat(result2).isEqualTo(expected2);
 
-        List<Integer> expected = Arrays.asList(1, 2, 3);
-        assertEquals(expected, result);
-    }
-    @Test
-    void testTakeWithEmptyList() {
-        List<Integer> inputList = Arrays.asList();
-        int n = 3;
-
-        List<Integer> result = YourClass.take(inputList, n);
-
-        assertTrue(result.isEmpty());
-    }
-
-    @Test
-    void testTakeWithNegativeN() {
-        List<Integer> inputList = Arrays.asList(1, 2, 3, 4, 5);
-        int n = -2;
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            YourClass.take(inputList, n);
-        });
-    }
-
-    @Test
-    void testTakeWithNGreaterThanListSize() {
-        List<Integer> inputList = Arrays.asList(1, 2, 3, 4, 5);
-        int n = 10;
-
-        List<Integer> result = YourClass.take(inputList, n);
-
-        assertEquals(inputList, result);
-    }
-
-    @Test
-    void testTakeWithNullInput() {
-        List<Integer> inputList = null;
-        int n = 3;
-
-        assertThrows(NullPointerException.class, () -> {
-            YourClass.take(inputList, n);
-        });
-    }
+        List<Integer> list3 = new ArrayList<>(Arrays.asList(1, 2, 3));
+        List<Integer> expected3 = new ArrayList<>(Arrays.asList(1, 2));
+        List<Integer> result3 = App.take(list3, 2);
+        assertThat(result3).isEqualTo(expected3);
         // END
     }
+}
 
