@@ -4,33 +4,86 @@ package exercise;
 import static org.assertj.core.api.Assertions.assertThat;
 
 // BEGIN
-public class TestApp {
+class AppTest {
     @Test
-    public void test_enlargeArrayImage() {
-        String[][] original_image = {
-                {"A", "B"},
-                {"C", "D"}
-        };
-        String[][] expected_enlarged_image = {
-                {"A", "A", "B", "B"},
-                {"A", "A", "B", "B"},
-                {"C", "C", "D", "D"},
-                {"C", "C", "D", "D"}
-        };
-        assertArrayEquals(App.enlargeArrayImage(original_image), expected_enlarged_image);
-    }
+    void testEnlargeArrayImage() {
 
-    @Test
-    public void test_emptyArray() {
-        String[][] empty_image = {};
-        assertArrayEquals(App.enlargeArrayImage(empty_image), new String[][]{});
-    }
+        String[][] image1 = {
+                {"*", "*", "*", "*"},
+                {"*", " ", " ", "*"},
+                {"*", " ", " ", "*"},
+                {"*", "*", "*", "*"},
+        };
 
-    @Test
-    public void test_singleRowArray() {
-        String[][] single_row_image = {{"A", "B", "C"}};
-        String[][] expected_enlarged_image = {{"A", "A", "B", "B", "C", "C"}};
-        assertArrayEquals(App.enlargeArrayImage(single_row_image), expected_enlarged_image);
+        String[][] enlargedImage1 = {
+                {"*", "*", "*", "*", "*", "*", "*", "*"},
+                {"*", "*", "*", "*", "*", "*", "*", "*"},
+                {"*", "*", " ", " ", " ", " ", "*", "*"},
+                {"*", "*", " ", " ", " ", " ", "*", "*"},
+                {"*", "*", " ", " ", " ", " ", "*", "*"},
+                {"*", "*", " ", " ", " ", " ", "*", "*"},
+                {"*", "*", "*", "*", "*", "*", "*", "*"},
+                {"*", "*", "*", "*", "*", "*", "*", "*"},
+        };
+        String[][] actual1 = App.enlargeArrayImage(image1);
+        assertThat(actual1).isEqualTo(enlargedImage1);
+
+        String[][] image2 = {
+                {" ", " ", "*", " ", " "},
+                {" ", "*", " ", "*", " "},
+                {" ", "*", " ", "*", " "},
+                {"*", " ", " ", " ", "*"},
+                {"*", " ", " ", " ", "*"},
+                {" ", "*", " ", "*", " "},
+                {" ", "*", " ", "*", " "},
+                {" ", " ", "*", " ", " "},
+        };
+
+        String[][] enlargedImage2 = {
+                {" ", " ", " ", " ", "*", "*", " ", " ", " ", " "},
+                {" ", " ", " ", " ", "*", "*", " ", " ", " ", " "},
+                {" ", " ", "*", "*", " ", " ", "*", "*", " ", " "},
+                {" ", " ", "*", "*", " ", " ", "*", "*", " ", " "},
+                {" ", " ", "*", "*", " ", " ", "*", "*", " ", " "},
+                {" ", " ", "*", "*", " ", " ", "*", "*", " ", " "},
+                {"*", "*", " ", " ", " ", " ", " ", " ", "*", "*"},
+                {"*", "*", " ", " ", " ", " ", " ", " ", "*", "*"},
+                {"*", "*", " ", " ", " ", " ", " ", " ", "*", "*"},
+                {"*", "*", " ", " ", " ", " ", " ", " ", "*", "*"},
+                {" ", " ", "*", "*", " ", " ", "*", "*", " ", " "},
+                {" ", " ", "*", "*", " ", " ", "*", "*", " ", " "},
+                {" ", " ", "*", "*", " ", " ", "*", "*", " ", " "},
+                {" ", " ", "*", "*", " ", " ", "*", "*", " ", " "},
+                {" ", " ", " ", " ", "*", "*", " ", " ", " ", " "},
+                {" ", " ", " ", " ", "*", "*", " ", " ", " ", " "},
+        };
+
+        String[][] actual2 = App.enlargeArrayImage(image2);
+        assertThat(actual2).isEqualTo(enlargedImage2);
+
+        String[][] image3 = {
+                {"@", "@"},
+                {"@", "|"},
+                {"—", "|"},
+                {"@", "|"},
+                {"@", "@"},
+        };
+
+        String[][] enlargedImage3 = {
+                {"@", "@", "@", "@"},
+                {"@", "@", "@", "@"},
+                {"@", "@", "|", "|"},
+                {"@", "@", "|", "|"},
+                {"—", "—", "|", "|"},
+                {"—", "—", "|", "|"},
+                {"@", "@", "|", "|"},
+                {"@", "@", "|", "|"},
+                {"@", "@", "@", "@"},
+                {"@", "@", "@", "@"},
+        };
+
+        String[][] actual3 = App.enlargeArrayImage(image3);
+        assertThat(actual3).isEqualTo(enlargedImage3);
     }
 }
 // END

@@ -7,34 +7,27 @@ import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 // BEGIN
-public class Sorter {
-    public static List<String> takeOldestMans(List<Map<String, String>> userList) {
-        Comparator<Map<String, String>> dobComparator = (user1, user2) -> {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                Date dob1 = dateFormat.parse(user1.get("dob"));
-                Date dob2 = dateFormat.parse(user2.get("dob"));
-                return dob1.compareTo(dob2);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                return 0;
-            }
-        };
-
-        List<Map<String, String>> maleUsers = new ArrayList<>();
-        for (Map<String, String> user : userList) {
-            if ("Male".equalsIgnoreCase(user.get("gender"))) {
-                maleUsers.add(user);
-            }
-        }
-
-        maleUsers.sort(dobComparator.reversed());
-
-        List<String> maleNames = new ArrayList<>();
-        for (Map<String, String> maleUser : maleUsers) {
-            maleNames.add(maleUser.get("name"));
-        }
-        return maleNames;
+class Sorter {
+    public static List<String> takeOldestMans2(List<Map<String, String>> users) {
+        return users.stream()
+                .filter(user -> user.get("gender") == "male")
+                .sorted((user1, user2) -> {
+                    LocalDate date1 = LocalDate.parse(user1.get("birthday"));
+                    LocalDate date2 = LocalDate.parse(user2.get("birthday"));
+                    return date1.compareTo(date2);
+                })
+                .map(user -> user.get("name"))
+                .collect(Collectors.toList());
     }
+
+    // alternative solution
+    public static List<String> takeOldestMans(List<Map<String, String>> users) {
+        return users.stream()
+                .filter(map1 -> map1.get("gender").equals("male"))
+                .sorted(Comparator.comparingLong(map2 -> LocalDate.parse(map2.get("birthday")).toEpochDay()))
+                .map(map3 -> map3.get("name"))
+                .collect(Collectors.toList());
+    }
+
 }
 // END

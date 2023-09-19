@@ -4,33 +4,22 @@ import java.util.Arrays;
 
 // BEGIN
 class App {
-    public static List<List<String>> enlargeArrayImage(List<List<String>> image) {
-        int height = image.size();
-        int width = image.get(0).size();
+    public static String[] duplicateValues(String[] items) {
 
-        List<List<String>> enlarged_image = new ArrayList<>();
+        return Arrays.stream(items)
+                .flatMap(item -> Arrays.stream(new String[] {item, item}))
+                .toArray(String[]::new);
+    }
 
-        for (int i = 0; i < height; i++) {
-            enlarged_image.add(image.get(i));
-            enlarged_image.add(image.get(i));
-        }
+    public static String[][] enlargeArrayImage(String[][] image) {
 
-        int enlarged_width = 2 * width;
-        for (int i = 0; i < enlarged_image.size(); i++) {
-            List<String> row = enlarged_image.get(i);
-            row.addAll(row);
-        }
+        String[][] horizontalyStretched = Arrays.stream(image)
+                .map(App::duplicateValues)
+                .toArray(String[][]::new);
 
-        return enlarged_image;
+        return Arrays.stream(horizontalyStretched)
+                .flatMap(item -> Arrays.stream(new String[][] {item, item}))
+                .toArray(String[][]::new);
     }
 }
-
-    List<List<String>> original_image = new ArrayList<>();
-original_image.add(new ArrayList<>(List.of("A", "B")));
-        original_image.add(new ArrayList<>(List.of("C", "D")));
-
-        List<List<String>> enlarged_image = App.enlargeArrayImage(original_image);
-        for (List<String> row : enlarged_image) {
-        System.out.println(String.join("", row));
-        }
 // END
