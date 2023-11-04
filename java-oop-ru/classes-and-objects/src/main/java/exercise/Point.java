@@ -5,14 +5,14 @@ class Point {
     private int x;
     private int y;
 }
-public Point (int x, int y) {
-    this.x = x;
-    this.y = y;
+Point (int coordinateX, int coordinateY) {
+    this.x = coordinateX;
+    this.y = coordinateY;
 }
 public int getX() {
-    return x;
+    return this.x;
 }
 public int getY() {
-    return y;
+    return this.y;
 }
 // END
