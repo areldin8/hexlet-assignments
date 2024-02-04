@@ -55,6 +55,8 @@ public final class App {
                 var page = new BuildArticlePage(title, content, e.getErrors());
                 ctx.render("articles/build.jte", Collections.singletonMap("page", page)).status(422);
             }
+        });
+        
         // END
 
         return app;
